@@ -10,6 +10,11 @@ import classes.Client;
 
 public class Client_dao {
 	
+	/**
+	 * Ajoute un Client dans la base de de données
+	 * 
+	 * @param Client
+	 */
 	public static void createClient(Client client){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -17,6 +22,11 @@ public class Client_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Ajoute une liste de Client à la base de données
+	 * 
+	 * @param Clients
+	 */
 	public static void createClients(List<Client> clients){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -42,6 +52,11 @@ public class Client_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Met à jour les données du Client passé en paramètre
+	 * 
+	 * @param Client
+	 */
 	public static void updateClient(Client client){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -49,6 +64,11 @@ public class Client_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Met à jour les données d'une liste de Client passée en paramètre
+	 * 
+	 * @param Client
+	 */
 	public static void updateClients(List<Client> clients){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -58,6 +78,11 @@ public class Client_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Retourne la liste de tout les Client présent dans la base de données
+	 * 
+	 * @return List<Client>
+	 */
 	public static List<Client> getAllClient(){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -68,6 +93,12 @@ public class Client_dao {
 		return clients;
 	}
 	
+	/**
+	 * Retourne un Client en fonction de son identifiant
+	 * 
+	 * @param idClient
+	 * @return Client
+	 */
 	public static Client getClientById(Long idClient){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -76,35 +107,39 @@ public class Client_dao {
 		return client;
 	}
 	
-	public static Client getClientByFirstName(String firstName){
+	/**
+	 * Retourne un Client en fonction de son nom et prénom
+	 * remarque : homonyme interdit (pas de tests, prenez garde !)
+	 * 
+	 * @param firstName
+	 * @return Client
+	 */
+	public static Client getClientByFirstAndLastName(String firstName, String lastName){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
 		TypedQuery<Client> query = em.createQuery("select c "+
 				"from Client c "+
-				"where c.firstName =:firstName",Client.class);
-		query.setParameter("id", firstName);
+				"where c.firstName =:firstName and "+
+				"c.lastName =:lastName ",Client.class);
+		query.setParameter("firstName", firstName);
+		query.setParameter("lastName", lastName);
 		Client client = query.getSingleResult();
 		DatabaseHelper.commitTxAndClose(em);
 		return client;
 	}
 	
-	public static Client getClientByLastName(String lastName){
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
-		TypedQuery<Client> query = em.createQuery("select c "+
-				"from Client c "+
-				"where c.lastName =:firstName",Client.class);
-		query.setParameter("id", lastName);
-		Client client = query.getSingleResult();
-		DatabaseHelper.commitTxAndClose(em);
-		return client;
-	}
 	
 	public static void prefere(Client client, Book book){
 		client.setPrefere(book);
 		updateClient(client);
 	}
-	
+	/**
+	 * Retourne la liste des Client qui ont acheté le livre passé
+	 * en paramètre
+	 * 
+	 * @param Book
+	 * @return List<Client>
+	 */
 	public static List<Client> getAcheteurs(Book book){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);

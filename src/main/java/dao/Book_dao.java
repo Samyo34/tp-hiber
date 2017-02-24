@@ -10,6 +10,11 @@ import classes.Client;
 
 public class Book_dao {
 	
+	/**
+	 *  Ajoute un Book dans la base de de données
+	 * 
+	 * @param Book
+	 */
 	public static void createBook(Book book){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -17,6 +22,11 @@ public class Book_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 *  Ajoute une liste de Book dans la base de de données
+	 * 
+	 * @param List<Book>
+	 */
 	public static void createBooks(List<Book> books){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -42,6 +52,11 @@ public class Book_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Met à jour les données du Book passé en paramètre
+	 * 
+	 * @param Book
+	 */
 	public static void updateBook(Book book){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -49,6 +64,11 @@ public class Book_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Met à jour les données d'une liste de Book passée en paramètre
+	 * 
+	 * @param List<Book>
+	 */
 	public static void updateClients(List<Book> books){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -58,6 +78,11 @@ public class Book_dao {
 		DatabaseHelper.commitTxAndClose(em);
 	}
 	
+	/**
+	 * Retourne la liste de tout les Book présent dans la base de données
+	 * 
+	 * @return List<Book>
+	 */
 	public static List<Book> getAllBooks(){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -68,6 +93,12 @@ public class Book_dao {
 		return books;
 	}
 	
+	/**
+	 * Retourne un Book en fonction de son identifiant
+	 * 
+	 * @param idBook
+	 * @return Book
+	 */
 	public static Book getBookById(Long idBook){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -76,6 +107,12 @@ public class Book_dao {
 		return book;
 	}
 	
+	/**
+	 * Retourne un Book en fonction de son titre
+	 * 
+	 * @param titleBook
+	 * @return Book
+	 */
 	public static Book getBookByTitle(Long titleBook){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -88,6 +125,12 @@ public class Book_dao {
 		return book;
 	}
 	
+	/**
+	 * Retourne la liste des Book acheté par le client passé en paramètre
+	 * 
+	 * @param Client
+	 * @return List<Book>
+	 */
 	public static List<Book> getBookAchete(Client client){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);
@@ -101,6 +144,11 @@ public class Book_dao {
 		return books;
 	}
 	
+	/**
+	 * Retourne la liste des Book qui ont été acheté
+	 * 
+	 * @return List<Book>
+	 */
 	public static List<Book> getBooksAchete(){
 		EntityManager em = DatabaseHelper.createEntityManager();
 		DatabaseHelper.beginTx(em);

@@ -1,12 +1,13 @@
 package classes;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 public class Client {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column
@@ -34,7 +35,7 @@ public class Client {
 	private Book prefere;
 	
 	@ManyToMany
-	private List<Book> achats = new ArrayList<Book>();
+	private Set<Book> achats = new HashSet<Book>();
 
 	public Long getId() {
 		return id;
@@ -76,11 +77,11 @@ public class Client {
 		this.prefere = prefere;
 	}
 
-	public List<Book> getAchats() {
+	public Set<Book> getAchats() {
 		return achats;
 	}
 
-	public void setAchats(List<Book> achats) {
+	public void setAchats(Set<Book> achats) {
 		this.achats = achats;
 	}
 	

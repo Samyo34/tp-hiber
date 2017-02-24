@@ -1,18 +1,11 @@
 package classes;
 
-
-import javax.persistence.EntityManager;
-
 import dao.Book_dao;
 import dao.Client_dao;
-import dao.DatabaseHelper;
-import dao.QueryManager;
 
 public class Run {
 
 	public static void main(String[] args) {
-		EntityManager em = DatabaseHelper.createEntityManager();
-		DatabaseHelper.beginTx(em);
 		Book b1 = new Book();
 		b1.setTitle("Le petit cheval de manège");
 		b1.setAuthor("Just Leblanc");
@@ -51,6 +44,7 @@ public class Run {
 		Client_dao.updateClient(c1);
 		Client_dao.updateClient(c2);
 		
+	
 		for (Client client : Client_dao.getAcheteurs(b1)) {
 			System.out.println(client);
 		}
