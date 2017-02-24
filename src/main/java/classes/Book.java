@@ -1,3 +1,4 @@
+package classes;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -78,5 +79,12 @@ public class Book {
 	public void setAcheteurs(List<Client> acheteurs) {
 		this.acheteurs = acheteurs;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
+	}
+	
 		
 }

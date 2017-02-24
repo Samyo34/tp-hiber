@@ -1,3 +1,4 @@
+package classes;
 
 public enum Gender {
 	M("M"),

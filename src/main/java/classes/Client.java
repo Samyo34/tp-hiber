@@ -1,8 +1,11 @@
+package classes;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -23,6 +26,7 @@ public class Client {
 	@Column
 	private String firstName;
 	
+	@Enumerated(EnumType.STRING)
 	@Column
 	private Gender gender;
 	
@@ -72,14 +76,6 @@ public class Client {
 		this.prefere = prefere;
 	}
 
-	public List<Book> getAchat() {
-		return achats;
-	}
-
-	public void setAchat(List<Book> achat) {
-		this.achats = achat;
-	}
-
 	public List<Book> getAchats() {
 		return achats;
 	}
@@ -93,6 +89,18 @@ public class Client {
 		this.achats.add(book);
 	}
 	
+	public void prefere(Book book)
+	{
+		this.prefere = book;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [id=" + id + ", lastName=" + lastName + ", firstName=" + firstName + ", gender=" + gender
+				+ ", prefere=" + prefere + "]";
+	}
+	
+
 	
 	
 }
